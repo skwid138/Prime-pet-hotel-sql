@@ -22,8 +22,8 @@ router.get('/', function (req, res){
                 }//END else
             });//END client.query
          }//END else no err
-    })//END pool connect
-})//END get
+    });//END pool connect
+});//END get
 
 router.post('/', function(req, res) {
     console.log('in pet post', req.body);
@@ -46,9 +46,60 @@ router.post('/', function(req, res) {
                 } else {
                     res.sendStatus(201);
                 }
-            })
+            });
         }
-    })
-})
+    });
+});
+
+// PUT update db row with new information and respond with accepted
+router.put('/:id', function (req, res) {
+    console.log('in PUT task route');
+    var petId = req.params.id;
+    pool.connect(function (err, client, done) {
+        if (err) {
+            console.log('PUT connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            // copied from another project
+            var queryString = "UPDATE pets SET checkedin='true' WHERE id=$1";
+            var values = [petId];
+            client.query(queryString, values, function (queryErr, resObj) {
+                if (queryErr) {
+                    console.log('Query PUT Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(201);
+                } // end else
+                done();
+            }); // end query
+        } // end else
+    }); // end connect
+}); // end PUT
+
+// Delete remove row from db and respond with accepted
+router.delete('/:id', function (req, res) {
+    console.log('in DELETE task route');
+    var petId = req.params.id;
+    pool.connect(function (err, client, done) {
+        if (err) {
+            console.log('DELETE connection error ->', err);
+            res.sendStatus(500);
+            done();
+        } else {
+            var queryString = 'DELETE FROM pets WHERE id=$1';
+            var values = [petId];
+            client.query(queryString, values, function (queryErr, resObj) {
+                if (queryErr) {
+                    console.log('Query DELETE Error ->', queryErr);
+                    res.sendStatus(500);
+                } else {
+                    res.sendStatus(202);
+                } // end else
+            }); // end query
+        } // end else
+    }); // end connect
+}); // end DELETE
+
 
 module.exports = router;
