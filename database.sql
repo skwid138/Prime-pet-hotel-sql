@@ -1,0 +1,12 @@
+-- DB Name: pet-hotel
+
+CREATE TABLE pets (
+	id SERIAL PRIMARY KEY,
+	petname VARCHAR(50),
+	breed VARCHAR(50),
+	color VARCHAR(50),
+	checkedin BOOLEAN DEFAULT false,
+	checkindate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	checkoutdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
