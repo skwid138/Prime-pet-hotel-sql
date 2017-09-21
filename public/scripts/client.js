@@ -14,6 +14,13 @@ myApp.controller( 'PetHotelController', function($http){
         }).then( function ( response ){
             console.log('back from server with:', response);
             vm.pets = response.data;
+            for (var i = 0; i < vm.pets.length; i++) {
+                if (vm.pets[i].checkedin) {
+                    vm.pets[i].checkedin = 'Checked In';
+                } else {
+                    vm.pets[i].checkedin = '<button></button>'
+                }
+            }
         }); 
     } //end getPets
 
@@ -21,7 +28,7 @@ myApp.controller( 'PetHotelController', function($http){
         $http({
             method: 'POST',
             url: '/pets',
-            data: {petname: vm.nameIn, breed: vm.breedIn, color: vm.colorIn, checkedin: vm.checkedIn }
+            data: {petname: vm.nameIn, breed: vm.breedIn, color: vm.colorIn}
         }).then( function (response){
             console.log('back from server post', response);
             getPets();

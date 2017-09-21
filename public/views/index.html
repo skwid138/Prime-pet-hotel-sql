@@ -26,24 +26,18 @@
                 <input type="text" id="nameIn" value="" placeholder="Name" ng-model="PHC.nameIn">
                 <input type="integer" id="breedIn" value="" placeholder="Breed" ng-model="PHC.breedIn">
                 <input type="text" id="colorIn" value="" placeholder="Color" ng-model="PHC.colorIn">
-                <!-- <input type="text" id="readyForTransferIn" value="" placeholder="Transfer"> -->
-                <select ng-model="PHC.checkedIn" id="checkedInIn">
-                        <option value="true">Checked In</option>
-                        <option selected="selected" value="false">Not Checked In</option>
-                </select>
                 <button ng-click="PHC.addPets()"type="button" id="addPet">Add Pet</button>
             </section>
             <section id="dataArea" class="container">
                 <h2>Pet Listing</h2>
-                <table class="table-striped">
+                <table class="table-striped table table-hover">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Breed</th>
                             <th>Color</th>
                             <th>Checked In</th>
-                            <!-- <th>Checked In Date</th> -->
-                            <!-- <th>Checked Out Date</th> -->
+                            <th>Checked Out</th>
                         </tr>
                     </thead>
                     <tbody id="petBody">

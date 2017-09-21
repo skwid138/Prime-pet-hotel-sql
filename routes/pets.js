@@ -30,8 +30,7 @@ router.post('/', function(req, res) {
     var petname = req.body.petname;
     var breed = req.body.breed;
     var color = req.body.color;
-    var checkedin = req.body.checkedin;
-    var petArr = [petname, breed, color, checkedin];
+    var petArr = [petname, breed, color];
     pool.connect( function(err, client, done) {
         if (err) {
             console.log('connection error');
@@ -39,7 +38,7 @@ router.post('/', function(req, res) {
             res.sendStatus(500);
         } else {
             console.log('req.body', req.body);
-            client.query('INSERT INTO pets (petname, breed, color, checkedin) VALUES ($1, $2, $3, $4)', petArr, function (qErr, resultObj) {
+            client.query('INSERT INTO pets (petname, breed, color) VALUES ($1, $2, $3)', petArr, function (qErr, resultObj) {
                 done();
                 if (qErr) {
                     res.sendStatus(500);
