@@ -23,15 +23,15 @@
         </header>
         <main ng-controller = "PetHotelController as PHC">
             <section id="inputArea" class="container" >
-                <input type="text" id="nameIn" value="" placeholder="Name">
-                <input type="integer" id="breedIn" value="" placeholder="Breed">
-                <input type="text" id="colorIn" value="" placeholder="Color">
+                <input type="text" id="nameIn" value="" placeholder="Name" ng-model="PHC.nameIn">
+                <input type="integer" id="breedIn" value="" placeholder="Breed" ng-model="PHC.breedIn">
+                <input type="text" id="colorIn" value="" placeholder="Color" ng-model="PHC.colorIn">
                 <!-- <input type="text" id="readyForTransferIn" value="" placeholder="Transfer"> -->
-                <select id="checkedInIn">
+                <select ng-model="PHC.checkedIn" id="checkedInIn">
                         <option value="true">Checked In</option>
                         <option selected="selected" value="false">Not Checked In</option>
                 </select>
-                <button type="button" id="addPet">Add Pet</button>
+                <button ng-click="PHC.addPets()"type="button" id="addPet">Add Pet</button>
             </section>
             <section id="dataArea" class="container">
                 <h2>Pet Listing</h2>
