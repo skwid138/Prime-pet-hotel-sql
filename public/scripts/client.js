@@ -78,5 +78,18 @@ myApp.controller( 'PetHotelController', function($http){ //creates PetHotelContr
         }); // end then
     };//end update function
 
+    vm.schedulePet = function(id, date){
+        console.log('results', id, date);
+        // var date = {
+    }
+        // }
+        
+    //     $http({
+    //         method: 'POST',
+    //         url: '/schedule' + id,
+    //         data:
+    //     })
+    // };
+
 }); //end Myapp.controller
 

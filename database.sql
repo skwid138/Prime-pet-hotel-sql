@@ -12,4 +12,6 @@ CREATE TABLE visit (
 	visit_id SERIAL PRIMARY KEY,
 	check_in BOOLEAN DEFAULT false,
 	check_out BOOLEAN DEFAULT false,
-	pet_id int REFERENCES pets (id) ON DELETE SET NULL);
+	pet_id int REFERENCES pets (id) ON DELETE SET NULL,
+	reservation DATE
+	);
