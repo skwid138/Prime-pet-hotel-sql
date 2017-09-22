@@ -32,16 +32,17 @@
             <input type="text" id="colorIn" value="" placeholder="Color" ng-model="PHC.colorIn">
             <button class="btn btn-success" ng-click="PHC.addPets()" type="button" id="addPet">Add Pet</button>
             <div>
-                <select>
-                    <option ng-repeat="pet in PHC.pets" ng-value="pet.visit_id">{{pet.petname}}</option>
+                <select selected="Select Pet">
+                    <option value="Select Pet">Select Pet</option>
+                    <option ng-repeat="pet in PHC.pets" ng-value="pet.id">{{pet.petname}}</option>
                 </select>
                 <input ng-model="date" type="date">
                 <button class="btn btn-info" ng-click="PHC.schedulePet(pet.id, date)">Schedule Visit</button>
             </div>
         </section>
-        <section id="dataArea" class="container">
+        <section id="visitArea" class="container">
 
-            <h2>Pet Listing</h2>
+            <h2>Pet Visits</h2>
             <table class="table-striped table table-hover">
                 <thead>
                     <tr>
@@ -52,20 +53,42 @@
                         <th>Reservation</th>
                         <th>Checked In</th>
                         <th>Checked Out</th>
-                        <th>Delete</th>
+                        <th>Delete Reservation</th>
 
                     </tr>
                 </thead>
                 <tbody id="petBody">
+                    <tr ng-repeat="visit in PHC.visits" ng-value="visit.visit_id">
+                        <td><button class="btn btn-primary" ng-click="PHC.checkInPet(visit.visit_id, visit.check_in)">Check In</button>
+                            <button class="btn btn-warning" ng-click="PHC.checkOutPet((visit.visit_id, visit.check_out)">Check Out</button></td>
+                        <td>{{visit.petname}}</td>
+                        <td>{{visit.breed}}</td>
+                        <td>{{visit.color}}</td>
+                        <td>{{visit.reservation}}</td>
+                        <td>{{visit.check_in}}</td>
+                        <td>{{visit.check_out}}</td>
+                        <td><button class="btn btn-danger" ng-click="PHC.deletePet(visit.visit_id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="petArea" class="container">
+
+            <h2>Pet Listing</h2>
+            <table class="table-striped table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Breed</th>
+                        <th>Color</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="petBody">
                     <tr ng-repeat="pet in PHC.pets" ng-value="pet.id">
-                        <td><button class="btn btn-primary" ng-click="PHC.checkInPet(pet.id, pet.check_in)">Check In</button>
-                            <button class="btn btn-warning" ng-click="PHC.checkOutPet(pet.id, pet.check_out)">Check Out</button></td>
                         <td>{{pet.petname}}</td>
                         <td>{{pet.breed}}</td>
                         <td>{{pet.color}}</td>
-                        <td>{{pet.reservation}}</td>
-                        <td>{{pet.check_in}}</td>
-                        <td>{{pet.check_out}}</td>
                         <td><button class="btn btn-danger" ng-click="PHC.deletePet(pet.id)">Delete</button></td>
                     </tr>
                 </tbody>

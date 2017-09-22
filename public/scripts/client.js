@@ -14,6 +14,7 @@ myApp.controller( 'PetHotelController', function($http){ //creates PetHotelContr
         }).then( function ( response ){
             console.log('back from server with:', response);
             vm.pets = response.data;  //sets response equal to pets
+            
         }); 
     } //end getPets
 
@@ -78,18 +79,35 @@ myApp.controller( 'PetHotelController', function($http){ //creates PetHotelContr
         }); // end then
     };//end update function
 
-    vm.schedulePet = function(id, date){
-        console.log('results', id, date);
-        // var date = {
-    }
-        // }
+    vm.schedulePet = function(id, dateInput){
+        console.log('dateInput ', dateInput);
+        console.log('id ', id);
+        
+        var newDate = dateInput.toString();
+        newDate = newDate.slice(4, 16);
+        console.log('newDate', newDate);
+        
+
+        var date = {
+            reservation: newDate
+        };
         
     //     $http({
     //         method: 'POST',
     //         url: '/schedule' + id,
-    //         data:
+    //         data: date
     //     })
-    // };
+    };
+
+    vm.getVisits = function(){ //GETs the pets and puts them on DOM
+        $http({
+            method: 'GET',
+            url: '/visit'
+        }).then(function (response) {
+            console.log('back from server with:', response);
+            vm.visits = response.data;  //sets response equal to pets
+        });
+    } //end getPets
 
 }); //end Myapp.controller
 
