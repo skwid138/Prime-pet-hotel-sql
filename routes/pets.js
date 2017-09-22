@@ -38,14 +38,24 @@ router.post('/', function(req, res) {
             res.sendStatus(500);
         } else {
             console.log('req.body', req.body);
-            client.query('INSERT INTO pets (petname, breed, color) VALUES ($1, $2, $3)', petArr, function (qErr, resultObj) {
+            client.query('INSERT INTO pets (petname, breed, color) VALUES ($1, $2, $3)RETURNING id', petArr, function (qErr, resultObj) {
                 done();
                 if (qErr) {
                     res.sendStatus(500);
                 } else {
-                    res.sendStatus(201);
-                }
-            });
+                    console.log('resultObj ', resultObj.rows[0].id);
+                    var newId = resultObj.rows[0].id;
+                    queryString = 'INSERT INTO visit (pet_id) VALUES ($1)';
+                    values = [newId];
+                    client.query(queryString, values, function(qErr2, resultObj2) {
+                        if(qErr2) {
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(201);
+                        } // end else
+                    }); // end visits query
+                } // end else
+            }); // end pets query
         }
     });
 });

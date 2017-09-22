@@ -14,16 +14,16 @@ myApp.controller( 'PetHotelController', function($http){
         }).then( function ( response ){
             console.log('back from server with:', response);
             vm.pets = response.data;
-            for (var i = 0; i < vm.pets.length; i++) {
-                if (vm.pets[i].check_in) {
-                    vm.pets[i].check_in = 'Checked In';
-                } else if (vm.pets[i].check_in === null) {
-                    vm.pets[i].check_in = 'Pending';
+            // for (var i = 0; i < vm.pets.length; i++) {
+            //     if (vm.pets[i].check_in) {
+            //         vm.pets[i].check_in = 'Checked In';
+            //     } else if (vm.pets[i].check_in === null) {
+            //         vm.pets[i].check_in = 'Pending';
 
-                }else {
-                    vm.pets[i].check_in = 'Checked Out';
-                }
-            }
+            //     }else {
+            //         vm.pets[i].check_in = 'Checked Out';
+            //     }
+            // }
         }); 
     } //end getPets
 
@@ -35,8 +35,11 @@ myApp.controller( 'PetHotelController', function($http){
         }).then( function (response){
             console.log('back from server post', response);
             getPets();
+            vm.nameIn = '';
+            vm.breedIn = '';
+            vm.colorIn = '';
         });
-    }
+    };
 
     // updates status
     vm.checkInPet = function(id, status){
@@ -54,5 +57,5 @@ myApp.controller( 'PetHotelController', function($http){
             console.log('back from server PUT' , response);
             getPets();
         }); // end then
-    }//end update function
+    };//end update function
 }); //end Myapp.controller
