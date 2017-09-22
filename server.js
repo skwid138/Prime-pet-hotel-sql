@@ -8,7 +8,7 @@ var petsRouter = require('./routes/pets');
 
 
 app.use(express.static('public'));
-app.use(bodyParser.json() );
+app.use(bodyParser.json());
 
 
 app.use('/', indexRouter);

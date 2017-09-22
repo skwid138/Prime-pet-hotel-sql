@@ -11,7 +11,7 @@ router.get('/', function (req, res){
             res.sendStatus(500);
         }//END if err
         else{
-            client.query('SELECT * FROM pets', function (quErr, resObj){
+            client.query('SELECT * FROM pets LEFT JOIN visit ON pets.id = visit.pet_id;', function (quErr, resObj){
                 done();
                 if(quErr){
                     console.log('query error');
@@ -54,6 +54,17 @@ router.post('/', function(req, res) {
 router.put('/:id', function (req, res) {
     console.log('in PUT task route');
     var petId = req.params.id;
+    var petStatus = req.body.check_in;
+    var newStatus = true;
+    // will set check_in value to false if it's already true,
+    // otherwise it sets false value to false
+    if (petStatus) {
+        newStatus = false;
+    }
+    console.log('petId ', petId);
+    console.log('petStatus ', petStatus);
+    console.log('newStatus ', newStatus);
+    
     pool.connect(function (err, client, done) {
         if (err) {
             console.log('PUT connection error ->', err);
@@ -61,8 +72,8 @@ router.put('/:id', function (req, res) {
             done();
         } else {
             // copied from another project
-            var queryString = "UPDATE pets SET checkedin='true' WHERE id=$1";
-            var values = [petId];
+            var queryString = "UPDATE visit SET check_in=$2 WHERE pet_id=$1";
+            var values = [petId, newStatus];
             client.query(queryString, values, function (queryErr, resObj) {
                 if (queryErr) {
                     console.log('Query PUT Error ->', queryErr);

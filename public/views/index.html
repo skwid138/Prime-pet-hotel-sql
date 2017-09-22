@@ -19,7 +19,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <header>
-            <h1>The page works</h1>
+            <h1>Le Pet Hotél</h1>
         </header>
         <main ng-controller = "PetHotelController as PHC">
             <section id="inputArea" class="container" >
@@ -33,19 +33,21 @@
                 <table class="table-striped table table-hover">
                     <thead>
                         <tr>
+                            <th>Select</th>
                             <th>Name</th>
                             <th>Breed</th>
                             <th>Color</th>
-                            <th>Checked In</th>
-                            <th>Checked Out</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="petBody">
                         <tr ng-repeat="pet in PHC.pets" ng-value="pet.id">
-                            <td>{{pet.petname}} </td>
-                            <td>{{pet.breed}} </td>
-                            <td>{{pet.color}} </td>
-                            <td>{{pet.checkedin}} </td>
+                            <td><button class="btn" ng-click="PHC.checkInPet(pet.id, pet.check_in)">Change Status</button></td>
+                            <td>{{pet.petname}}</td>
+                            <td>{{pet.breed}}</td>
+                            <td>{{pet.color}}</td>
+                            <td>{{pet.check_in}}</td>
+                            
                         </tr>
                     </tbody>
                 </table>

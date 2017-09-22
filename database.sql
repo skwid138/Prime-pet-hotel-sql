@@ -5,8 +5,10 @@ CREATE TABLE pets (
 	petname VARCHAR(50),
 	breed VARCHAR(50),
 	color VARCHAR(50),
-	checkedin BOOLEAN DEFAULT false,
-	checkindate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	checkoutdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	
 );
 
+CREATE TABLE visit (
+	visit_id SERIAL PRIMARY KEY,
+	check_in BOOLEAN DEFAULT false,
+	pet_id int REFERENCES pets (id) ON DELETE SET NULL);
