@@ -2,59 +2,71 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Pet Hotel</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="../vendors/angular.min.js"></script>
-        <script src="../scripts/client.js"></script>
-        <link rel="stylesheet" type="text/css" href="../styles/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="../styles/style.css" />
-    </head>
-    <body class="container" ng-app="myApp">
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pet Hotel</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../vendors/angular.min.js"></script>
+    <script src="../scripts/client.js"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
+</head>
+
+<body class="container" ng-app="myApp">
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <header>
-            <h1>Le Pet Hotél</h1>
-        </header>
-        <main ng-controller = "PetHotelController as PHC">
-            <section id="inputArea" class="container" >
-                <input type="text" id="nameIn" value="" placeholder="Name" ng-model="PHC.nameIn">
-                <input type="integer" id="breedIn" value="" placeholder="Breed" ng-model="PHC.breedIn">
-                <input type="text" id="colorIn" value="" placeholder="Color" ng-model="PHC.colorIn">
-                <button ng-click="PHC.addPets()"type="button" id="addPet">Add Pet</button>
-            </section>
-            <section id="dataArea" class="container">
-                <h2>Pet Listing</h2>
-                <table class="table-striped table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Select</th>
-                            <th>Name</th>
-                            <th>Breed</th> 
-                            <th>Color</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="petBody">
-                        <tr ng-repeat="pet in PHC.pets" ng-value="pet.id">
-                            <td><button class="btn" ng-click="PHC.checkInPet(pet.id, pet.check_in)">Change Status</button></td>
-                            <td>{{pet.petname}}</td>
-                            <td>{{pet.breed}}</td>
-                            <td>{{pet.color}}</td>
-                            <td>{{pet.check_in}}</td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-        </main>
-        <footer>
+    <header>
+        <h1>Le Pet Hôtél</h1>
+    </header>
+    <main ng-controller="PetHotelController as PHC">
+        <section id="inputArea" class="container">
+            <input type="text" id="nameIn" value="" placeholder="Name" ng-model="PHC.nameIn">
+            <input type="integer" id="breedIn" value="" placeholder="Breed" ng-model="PHC.breedIn">
+            <input type="text" id="colorIn" value="" placeholder="Color" ng-model="PHC.colorIn">
+            <button ng-click="PHC.addPets()" type="button" id="addPet">Add Pet</button>
+        </section>
+        <section id="dataArea" class="container">
+            <h2>Pet Listing</h2>
+            <table class="table-striped table table-hover">
+                <thead>
+                    <tr>
+                        <th>Change Status</th>
+                        <th>Name</th>
+                        <th>Breed</th>
+                        <th>Color</th>
+                        <th>Checked In</th>
+                        <th>Checked Out</th>
+                        <th>Delete</th>
 
-        </footer>
-    </body>
+                    </tr>
+                </thead>
+                <tbody id="petBody">
+                    <tr ng-repeat="pet in PHC.pets" ng-value="pet.id">
+                        <td><button class="btn" ng-click="PHC.checkInPet(pet.id, pet.check_in)">Check In</button>
+                            <button class="btn" ng-click="PHC.checkOutPet(pet.id, pet.check_out)">Check Out</button></td>
+                        <td>{{pet.petname}}</td>
+                        <td>{{pet.breed}}</td>
+                        <td>{{pet.color}}</td>
+                        <td>{{pet.check_in}}</td>
+                        <td>{{pet.check_out}}</td>
+                        
+                        <td><button class="btn" ng-click="PHC.deletePet(pet.id)">Delete</button></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+
 </html>
